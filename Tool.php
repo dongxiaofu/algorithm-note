@@ -41,4 +41,14 @@ trait Tool
 
         return $arr;
     }
+
+    protected function copyArray($arr, $start, $end)
+    {
+        $newArr = [];
+        for($i = $start; $i <= $end; $i++){
+            $newArr[$i] = $arr[$i];
+        }
+
+        return $newArr;
+    }
 }
