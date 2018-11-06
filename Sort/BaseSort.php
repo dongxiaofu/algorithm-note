@@ -21,9 +21,13 @@ class BaseSort
 
 //        $arr = [2,0,9,-1];
 
+//        $arr = [17,8,18 ,12 ,14 ,16];
+
         $sort = new Static();
         $newArr = $sort->usort($arr);
         $sort->prettyPrint($arr);
         $sort->prettyPrint($newArr);
     }
+
+
 }
