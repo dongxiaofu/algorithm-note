@@ -29,7 +29,7 @@ class MergeSort extends BaseSort
         $arr = $this->sort($arr, $start, $mid);
         $arr = $this->sort($arr, $mid + 1, $end);
         $arr = $this->merge($arr, $start, $mid, $end);
-        
+
         return $arr;
     }
 
