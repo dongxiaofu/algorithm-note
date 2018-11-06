@@ -28,8 +28,8 @@ class QuickSort extends BaseSort
         }
 
         $j = $this->partition($arr, $start, $end);
-        $arr = $this->sort($arr, $start, $j - 1);
-        $arr = $this->sort($arr, $j + 1, $end);
+        $arr = $this->sort($arr, $start, $j-1);
+        $arr = $this->sort($arr, $j+1, $end);
 
         return $arr;
     }
@@ -40,21 +40,21 @@ class QuickSort extends BaseSort
         $j = $end + 1;
         $v = $arr[$start];
 
-        while (true) {
+        while(true){
 
-            while ($this->less($arr[++$i], $v)) {
-                if ($i == $end) {
+            while($this->less($arr[++$i], $v)){
+                if($i == $end){
                     break;
                 }
             }
 
-            while ($this->less($v, $arr[--$j])) {
-                if ($j == $start) {
+            while($this->less($v, $arr[--$j])){
+                if($j == $start){
                     break;
                 }
             }
 
-            if ($i >= $j) {
+            if($i >= $j){
                 break;
             }
 
