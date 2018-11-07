@@ -21,7 +21,7 @@ class Bag
         $first = new Node();
         $first->setItem($item);
         $first->setNext($oldFirst);
-        
+
         $this->first = $first;
 
         $this->size++;
