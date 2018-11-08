@@ -51,4 +51,39 @@ trait Tool
 
         return $newArr;
     }
+
+    /**
+     * 二叉Heap中的下沉方法
+     * @param $array
+     * @param $k
+     * @param $n
+     */
+    protected function sinkInHeap(&$array, $k, $n): void
+    {
+        while($k * 2 <= $n){
+
+            $j = $k * 2;
+            /**
+             * 边界条件弄错了，没有判断超出数组边界
+             */
+            if($j <= $n & $j+1 <= $n && $this->less($array[$j], $array[$j+1])){
+                $j++;
+            }
+
+            /**
+             * 否定判断，绕口，我很容易出错，理解起来也费尽
+             */
+            if(!$this->less($array[$k], $array[$j])){
+                break;
+            }
+
+//            if($this->less($array[$j], $array[$k])){
+//                break;
+//            }
+
+            $this->exch($array, $k, $j);
+
+            $k = $j;
+        }
+    }
 }

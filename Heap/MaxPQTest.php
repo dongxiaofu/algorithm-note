@@ -3,10 +3,14 @@ declare(strict_types=1);
 
 namespace App\Heap;
 
+use App\Tool;
+
 require_once dirname(__DIR__) . '/Autoload.php';
 
 class MaxPQTest
 {
+    use Tool;
+
     public static function main()
     {
         $maxPQ = new MaxPQ();
@@ -44,6 +48,12 @@ class MaxPQTest
         echo 'empty:' . intval($maxPQ->isEmpty()) . '<br />';
         echo 'size:' . $maxPQ->size() . '<br />';
         var_dump($max);
+
+        echo '<hr>';
+
+        $array = self::mock(10);
+        $sortedArray = $maxPQ->sort($array);
+        var_dump($sortedArray);
     }
 }
 

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Heap;
 
+use App\Tool;
+
 /**
  * Class MaxPQ
  * @package App\Heap
@@ -12,6 +14,8 @@ namespace App\Heap;
  */
 class MaxPQ
 {
+    use Tool;
+
     private $pq = null;
     private $n = 0;
 
@@ -63,7 +67,7 @@ class MaxPQ
         return $max;
     }
 
-    private function less(int $i, int $j): bool
+    private function lessByKey(int $i, int $j): bool
     {
         $iv = $this->pq[$i] ?? 0;
         $jv = $this->pq[$j] ?? 0;
@@ -71,7 +75,7 @@ class MaxPQ
         return ($iv < $jv);
     }
 
-    private function exch(int $i, int $j): void
+    private function exchByKey(int $i, int $j): void
     {
         if (isset($this->pq[$i]) && isset($this->pq[$j])) {
             $tmp = $this->pq[$i];
@@ -100,8 +104,8 @@ class MaxPQ
         }
          * */
 
-        if($this->less($parentIndex, $k)){
-            $this->exch($parentIndex, $k);
+        if($this->lessByKey($parentIndex, $k)){
+            $this->exchByKey($parentIndex, $k);
 
             return $parentIndex;
         }
@@ -123,14 +127,33 @@ class MaxPQ
             return $sinkIndex;
         }
 
-        if (isset($this->pq[$leftChildIndex]) && $this->less($k, $leftChildIndex)) {
-            $this->exch($k, $leftChildIndex);
+        if (isset($this->pq[$leftChildIndex]) && $this->lessByKey($k, $leftChildIndex)) {
+            $this->exchByKey($k, $leftChildIndex);
             return $leftChildIndex;
-        } elseif (isset($this->pq[$rightChildIndex]) && $this->less($k, $rightChildIndex)) {
-            $this->exch($k, $rightChildIndex);
+        } elseif (isset($this->pq[$rightChildIndex]) && $this->lessByKey($k, $rightChildIndex)) {
+            $this->exchByKey($k, $rightChildIndex);
             return $rightChildIndex;
         }
 
         return $sinkIndex;
+    }
+
+    public function sort($array): array
+    {
+        array_unshift($array, null);
+        $n = count($array)-1;
+
+        // 用数组生成二叉堆
+        for($k = intval($n/2); $k >= 1; $k--){
+            $this->sinkInHeap($array, $k, $n);
+        }
+
+        // 下沉升序排序
+        while($n){
+            $this->exch($array, 1, $n--);
+            $this->sinkInHeap($array, 1, $n);
+        }
+
+        return $array;
     }
 }
