@@ -7,6 +7,7 @@ namespace App\Heap;
  * Class MaxPQ
  * @package App\Heap
  * 1>下沉时的终止条件是什么？
+ * * a>下沉失败
  *
  */
 class MaxPQ
@@ -34,9 +35,8 @@ class MaxPQ
         $k = $this->n + 1;
         $this->pq[$k] = $item;
 
-        $isRun = true;
-        while($isRun){
-            $isRun = $this->swim($k);
+        while($k){
+            $k = $this->swim($k);
         }
 
         $this->n++;
@@ -52,10 +52,10 @@ class MaxPQ
         $this->pq[1] = $this->pq[$this->n];
         $this->pq[$this->n] = null;
 
-        $isRun = true;
-        while ($isRun) {
+        $k = 1;
+        while ($k) {
 
-            $isRun = $this->sink(1);
+            $k = $this->sink($k);
         }
 
         $this->n--;
@@ -80,19 +80,19 @@ class MaxPQ
         }
     }
 
-    private function swim($k): bool
+    private function swim($k): int
     {
+        $parentIndex = 0;
+
         if (!isset($this->pq[$k])) {
-            return false;
+            return $parentIndex;
         }
 
         $parentIndex = intval($k / 2);
         if (!isset($this->pq[$parentIndex])) {
-            return false;
+            return $parentIndex;
         }
 
-        $currentNode = $this->pq[$k];
-        $parent = $this->pq[$parentIndex];
         /**
          * 这种绕口的判断，我很容易弄错
         if (!$this->less($parent, $currentNode)) {
@@ -101,34 +101,36 @@ class MaxPQ
          * */
 
         if($this->less($parentIndex, $k)){
-            $this->exch($k, $parentIndex);
+            $this->exch($parentIndex, $k);
 
-            return true;
+            return $parentIndex;
         }
 
-        return false;
+        return $parentIndex;
     }
 
-    private function sink($k): bool
+    private function sink($k): int
     {
+        $sinkIndex = 0;
+
         if (!isset($this->pq[$k])) {
-            return false;
+            return $sinkIndex;
         }
 
         $leftChildIndex = $k * 2;
         $rightChildIndex = $k * 2 + 1;
         if (!isset($this->pq[$leftChildIndex]) && !isset($this->pq[$rightChildIndex])) {
-            return false;
+            return $sinkIndex;
         }
 
         if (isset($this->pq[$leftChildIndex]) && $this->less($k, $leftChildIndex)) {
             $this->exch($k, $leftChildIndex);
-            return true;
+            return $leftChildIndex;
         } elseif (isset($this->pq[$rightChildIndex]) && $this->less($k, $rightChildIndex)) {
             $this->exch($k, $rightChildIndex);
-            return true;
+            return $rightChildIndex;
         }
 
-        return false;
+        return $sinkIndex;
     }
 }
