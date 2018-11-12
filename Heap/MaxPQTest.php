@@ -58,3 +58,9 @@ class MaxPQTest
 }
 
 MaxPQTest::main();
+
+echo '<hr>';
+
+for($i = 0; $i < 0; $i++){
+    echo $i . '<hr>';
+}
