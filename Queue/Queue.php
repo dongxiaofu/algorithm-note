@@ -53,4 +53,24 @@ class Queue
 
         return $item;
     }
+
+    public function getFirst(): ?Node
+    {
+        return $this->first;
+    }
+
+    public function setFirst(?Node $node): void
+    {
+        $this->first = $node;
+    }
+
+    public function printItems(): void
+    {
+        $node = $this->first;
+        while($node){
+            echo $node->getItem() . ' ';
+            $node = $node->getNext();
+        }
+        echo '<hr>';
+    }
 }

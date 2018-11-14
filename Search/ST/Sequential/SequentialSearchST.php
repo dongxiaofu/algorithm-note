@@ -219,7 +219,7 @@ class SequentialSearchST implements ST
 
     public function keys(): ?array
     {
-        $keys = [];
+        #$keys = [];
 
         for($x = $this->first; $x != null; $x = $x->getNext()){
             $keys[] = $x->getKey();
