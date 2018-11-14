@@ -14,7 +14,7 @@ class Node
     /**
      * @return string
      */
-    public function getItem(): string
+    public function getItem(): ?string
     {
         return $this->item;
     }
@@ -22,7 +22,7 @@ class Node
     /**
      * @param string $item
      */
-    public function setItem(string $item): void
+    public function setItem(?string $item): void
     {
         $this->item = $item;
     }
@@ -30,7 +30,7 @@ class Node
     /**
      * @return Node
      */
-    public function getNext(): Node
+    public function getNext(): ?Node
     {
         return $this->next;
     }
@@ -38,7 +38,7 @@ class Node
     /**
      * @param Node $next
      */
-    public function setNext(Node $next): void
+    public function setNext(?Node $next): void
     {
         $this->next = $next;
     }
