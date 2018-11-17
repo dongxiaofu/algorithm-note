@@ -51,4 +51,15 @@ class Stack
     {
         return $this->n;
     }
+
+    public function top(): ?string
+    {
+        if(is_null($this->first)){
+            return null;
+        }
+
+        $top = $this->first->getItem();
+
+        return $top;
+    }
 }
