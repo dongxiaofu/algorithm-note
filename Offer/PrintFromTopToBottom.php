@@ -10,18 +10,6 @@ namespace App\Offer;
 
 require_once dirname(__DIR__) . '/Autoload.php';
 
-class TreeNode
-{
-    var $val;
-    var $left = NULL;
-    var $right = NULL;
-
-    function __construct($val)
-    {
-        $this->val = $val;
-    }
-}
-
 class PrintFromTopToBottom
 {
     public function run1(TreeNode $root): array
