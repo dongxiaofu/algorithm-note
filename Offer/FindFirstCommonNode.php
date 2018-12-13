@@ -126,6 +126,69 @@ class FindFirstCommonNode
         return $firstCommonNode;
     }
 
+    public function run3(ListNode $pHead1, ListNode $pHead2): ?ListNode
+    {
+        // 先计算出两个链表的结点个数
+        $cur1 = $pHead1;
+        $num1 = 0;
+        while($cur1){
+            $num1++;
+            $cur1 = $cur1->getNext();
+        }
+
+        $cur2 = $pHead2;
+        $num2 = 0;
+        while($cur2){
+            $num2++;
+            $cur2 = $cur2->getNext();
+        }
+
+        // 结点数的链表先开始遍历，将多出的结点遍历完毕之后，两个结点一起遍历；
+        // 遇到第一个公共结点，即为目标结点
+        $next1 = $pHead1;
+        $next2 = $pHead2;
+        $diff = abs($num2 - $num1);
+        if($num2 >= $num1){
+            while($num2 > 0){
+                $next2 = $next2->getNext();
+                if($diff == 0){
+                   $next1 = $next1->getNext();
+                }
+                if($this->equal($next1, $next2)){
+                    return $next1;
+                }
+                $num2--;
+                $diff--;
+            }
+        }else{
+            while($num1 > 0){
+                $next1 = $next1->getNext();
+                if($diff == 0){
+                    $next2 = $next2->getNext();
+                }
+                if($this->equal($next1, $next2)){
+                    return $next1;
+                }
+                $num1--;
+                $diff--;
+            }
+        }
+
+        return null;
+    }
+
+//    private function findCommonNode(
+//        ListNode $pHead1,
+//        ListNode $pHead2,
+//        int $num1,
+//        int $num2
+//    ): ?ListNode
+//    {
+//        $next1 = $pHead1;
+//        $next2 = $pHead2;
+//        $diff = abs($num2 - $num1);
+//    }
+
     private function equal(ListNode $listNode1, ListNode $listNode2): bool
     {
         return ($listNode1->getVal() == $listNode2->getVal() && $listNode1->getNext() == $listNode2->getNext());
@@ -152,4 +215,7 @@ $commonNode = $class->run1($node1, $node21);
 var_dump($commonNode);
 
 $commonNode = $class->run2($node1, $node21);
+var_dump($commonNode);
+
+$commonNode = $class->run3($node1, $node21);
 var_dump($commonNode);
