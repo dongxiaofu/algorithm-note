@@ -150,27 +150,27 @@ class FindFirstCommonNode
         $diff = abs($num2 - $num1);
         if($num2 >= $num1){
             while($num2 > 0){
+                if($this->equal($next1, $next2)){
+                    return $next1;
+                }
                 $next2 = $next2->getNext();
                 if($diff == 0){
                    $next1 = $next1->getNext();
                 }
-                if($this->equal($next1, $next2)){
-                    return $next1;
-                }
                 $num2--;
-                $diff--;
+                $diff && $diff--;
             }
         }else{
             while($num1 > 0){
+                if($this->equal($next1, $next2)){
+                    return $next1;
+                }
                 $next1 = $next1->getNext();
                 if($diff == 0){
                     $next2 = $next2->getNext();
                 }
-                if($this->equal($next1, $next2)){
-                    return $next1;
-                }
                 $num1--;
-                $diff--;
+                $diff && $diff--;
             }
         }
 
