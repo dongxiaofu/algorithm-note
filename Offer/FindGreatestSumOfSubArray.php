@@ -15,8 +15,8 @@ class FindGreatestSumOfSubArray
 {
     /**
      * 时间复杂度O(n²)
-     * 先从index为0开始的子数组开始，找出这类子数组中和的最大值
-     * * * 判断子数组之和不是最大值：增加一个元素后，和大于该子数组
+     * 连求所有的子数组的和这种蛮力写法，我都需要思考
+     * 先找出所有的子数组的和，组成数组
      * 在这类数组中再找出最大值
      * @param array $data
      * @return int
@@ -33,15 +33,20 @@ class FindGreatestSumOfSubArray
     {
         $end = count($data);
         $res = [];
+        $res2 = [];
         for($i = 0; $i < $end; $i++){
             $sum = $data[$i];
             $res[] = $sum;
+            $subArr = [$sum];
+
             for($j = $i+1; $j < $end; $j++){
                 $sum += $data[$j];
                 $res[] = $sum;
+                $subArr[] = $data[$j];
+                $res2[$sum] = $subArr;
             }
         }
-
+        var_dump($res2);
         return $res;
     }
 
