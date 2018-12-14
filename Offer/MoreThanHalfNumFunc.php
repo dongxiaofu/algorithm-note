@@ -3,6 +3,11 @@ declare(strict_types=1);
 
 namespace App\Offer\Func;
 
+/**
+ * 判断是否超过数组的一半，花了很多时间
+ * 不执行代码，凭肉眼，我几乎不能看出隐藏的问题
+ * 另外，数组中间元素的计算（floor还是ceil，关系到运行结果是否正确）
+ */
 
 function MoreThanHalfNum_Solution($numbers)
 {
@@ -15,20 +20,20 @@ function MoreThanHalfNum_Solution($numbers)
 
     $start = 0;
     $end = count($sortedNumbers);
-    $mid = intval(ceil($start + $end - 1) / 2);
+    $mid = intval(ceil($start + $end) / 2);
     $midVal = $sortedNumbers[$mid];
     $firstKIndex = getFirstKIndex($sortedNumbers, $start, $mid, $midVal);
-    if($firstKIndex == -1){
+    if ($firstKIndex == -1) {
         $firstKIndex = $mid;
     }
     $lastKIndex = getLastIndex($sortedNumbers, $mid, $end - 1, $midVal);
-    if($lastKIndex == -1){
+    if ($lastKIndex == -1) {
         $lastKIndex = $mid;
     }
     $n = $lastKIndex - $firstKIndex + 1;
     $halfN = intval(ceil($end / 2));
     var_dump($sortedNumbers, $n, $halfN);
-    if($n >= $halfN){
+    if ($n >= $halfN) {
         return $midVal;
     }
 
@@ -76,20 +81,20 @@ function QuickSortCore($numbers, $start, $end)
 
 function getFirstKIndex($data, $start, $end, $k)
 {
-    if($start == $end && $k != $data[$start]){
+    if ($start == $end && $k != $data[$start]) {
         return -1;
     }
     $mid = intval(($start + $end) / 2);
     $midVal = $data[$mid];
-    if($k == $midVal){
-        if($mid == $start || $data[$mid-1] != $k){
+    if ($k == $midVal) {
+        if ($mid == $start || $data[$mid - 1] != $k) {
             return $mid;
-        }else{
+        } else {
             $end = $mid;
         }
-    }elseif($k > $midVal){
+    } elseif ($k > $midVal) {
         $end = $mid;
-    }else{
+    } else {
         $start = $mid + 1;
     }
 
@@ -98,21 +103,21 @@ function getFirstKIndex($data, $start, $end, $k)
 
 function getLastIndex($data, $start, $end, $k)
 {
-    if($start == $end && $k != $data[$start]){
+    if ($start == $end && $k != $data[$start]) {
         return -1;
     }
 
     $mid = intval(($start + $end) / 2);
     $midVal = $data[$mid];
-    if($k == $midVal){
-        if($mid == $end || $data[$mid+1] != $k){
+    if ($k == $midVal) {
+        if ($mid == $end || $data[$mid + 1] != $k) {
             return $mid;
-        }else{
+        } else {
             $start = $mid;
         }
-    }elseif($k > $midVal){
+    } elseif ($k > $midVal) {
         $end = $mid;
-    }else{
+    } else {
         $start = $mid + 1;
     }
 
@@ -127,6 +132,6 @@ function getLastIndex($data, $start, $end, $k)
 //$target = MoreThanHalfNum_Solution($data);
 ////var_dump($target);
 
-$data = [1,2,3,2,2,2,5,4,2];
+$data = [1, 2, 3, 2, 2, 2, 5, 4, 2];
 $target = MoreThanHalfNum_Solution($data);
 var_dump($target);
