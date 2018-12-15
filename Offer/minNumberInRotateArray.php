@@ -11,7 +11,7 @@ function minNumberInRotateArray($rotateArray)
 
     $mix = 0;
 
-    for ($i = 1; $i < $count - 1; $i++) {
+    for ($i = 1; $i < $count; $i++) {
         $j = $i - 1;
         if ($rotateArray[$i] <= $rotateArray[$j]) {
             $mix = $rotateArray[$i];
