@@ -76,3 +76,7 @@ $class = new PrintMinNumber();
 $data = [3,32,321];
 $res = $class->run1($data);
 var_dump($res);
+
+$data = [3,5,1,4,2];
+$res = $class->run1($data);
+var_dump($res);

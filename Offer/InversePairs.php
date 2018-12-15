@@ -36,6 +36,11 @@ class InversePairs
         return $num % self::BASE;
     }
 
+    /**
+     * 有难度，忘记了思路，回忆起思路后，不知道怎么实现为代码
+     * @param array $data
+     * @return int
+     */
     public function run2(array $data): int
     {
         $copy = $data;
