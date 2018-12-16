@@ -14,12 +14,33 @@ namespace App\Offer;
  */
 class ReverseSentence
 {
+    // 在末尾的多出的空格那里，debug很久
     public function run1(string $str): string
     {
+        $stack = new \SplStack();
         $length = strlen($str);
         $newStr = '';
-        for($i = $length - 1; $i >= 0; $i--){
-            $newStr .= $str[$i];
+        $word = '';
+        for($i = 0; $i < $length; $i++){
+            if($str[$i] == ' '){
+                // 这两个push的顺序很重要，弄错之后排查了很久
+                if($word){
+                    $stack->push($word);
+                    $word = '';
+                }
+                $stack->push($str[$i]);
+
+            }else{
+                $word .= $str[$i];
+            }
+        }
+
+        if($word){
+            $stack->push($word);
+        }
+
+        while($stack->count() && $top = $stack->pop()){
+            $newStr .= $top;
         }
 
         return $newStr;
@@ -28,6 +49,9 @@ class ReverseSentence
 
 // test
 $class = new ReverseSentence();
-$str = "student. a am I";
+$str = "I am a student.";
 $res = $class->run1($str);
 var_dump($res);
+var_dump(strlen($res));
+var_dump(empty(''));
+var_dump(empty(' '));
