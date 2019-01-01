@@ -12,8 +12,12 @@ namespace App\Offer;
  */
 class MaxInWindowsV1
 {
-    public function getMaxInWindows(array $nums, int $size): array
+    public function getMaxInWindows(?array $nums, int $size): array
     {
+        if(empty($nums) || empty($size) || $size < 0){
+            return [];
+        }
+
         $count = count($nums);
         if (empty($count)) {
             return [];
@@ -79,3 +83,17 @@ $nums = [2, 3, 4, 2, 6, 2, 5, 1];
 $size = 3;
 $res = $class->getMaxInWindows($nums, $size);
 var_dump($res);
+
+$class = new MaxInWindowsV1();
+$nums = null;
+$size = 3;
+$res = $class->getMaxInWindows($nums, $size);
+var_dump($res);
+
+$class = new MaxInWindowsV1();
+$nums = [10,14,12,11];
+$size = 0;
+$res = $class->getMaxInWindows($nums, $size);
+var_dump($res);
+
+
