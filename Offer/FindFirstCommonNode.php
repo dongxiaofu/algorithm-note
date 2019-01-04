@@ -17,8 +17,8 @@ use App\Stack\Stack;
 
 class ListNode
 {
-    private $val;
-    private $next = null;
+    public $val;
+    public $next = null;
 
     public function __construct(?int $val)
     {
