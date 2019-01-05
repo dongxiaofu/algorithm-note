@@ -16,31 +16,27 @@ class RegularExpressionV1
             return false;
         }
 
-        if($s == '' && $pattern == ''){
+        if ($s == '' && $pattern == '') {
             return true;
         }
 
-        if($s != '' && $pattern == ''){
+        if ($s != '' && $pattern == '') {
             return false;
         }
-
-//        if($s == '' && $pattern == '.'){
-//            return false;
-//        }
 
         $sLength = strlen($s);
         $patternLength = strlen($pattern);
 
         $i = 0;
         $j = 0;
-        if($sLength){
+        if ($sLength) {
             if (($s[0] != $pattern[0]) && $pattern[0] != '.' && ($patternLength < 2 || ($patternLength >= 2 && $pattern[1] != '*'))) {
                 return false;
             }
         }
 
         if ($j + 1 >= $patternLength || $pattern[$j + 1] != '*') {
-            if ($patternLength >0 && (($sLength != 0 && $s[$i] == $pattern[$j]) || ($sLength != 0 && $s[0] != '' && $pattern[$j] == '.'))) {
+            if ($patternLength > 0 && (($sLength != 0 && $s[$i] == $pattern[$j]) || ($sLength != 0 && $s[0] != '' && $pattern[$j] == '.'))) {
                 $s = substr($s, $i + 1);
                 $pattern = substr($pattern, $j + 1);
                 return $this->match($s, $pattern);
