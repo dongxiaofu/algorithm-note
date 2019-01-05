@@ -50,3 +50,4 @@ var_dump($target);
 $node1 = null;
 $target = EntryNodeOfLoop($node1);
 var_dump($target);
+
